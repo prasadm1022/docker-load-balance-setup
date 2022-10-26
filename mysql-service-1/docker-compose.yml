@@ -1,0 +1,27 @@
+version: '3'
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpwd
+      MYSQL_DATABASE: upwork
+      MYSQL_USER: upwork
+      MYSQL_PASSWORD: upwork
+      MYSQL_TCP_PORT: 7010
+    restart: always
+  server:
+    image: tomcat:9.0
+    volumes:
+      - "./target/mysql-service-1.war:/usr/local/tomcat/webapps/mysql-service-1.war"
+    depends_on:
+      - database
+    restart: always
+  nginx:
+    build:
+      context: ./nginx
+    depends_on:
+      - database
+      - server
+    ports:
+      - "7000:80"
+    restart: always
