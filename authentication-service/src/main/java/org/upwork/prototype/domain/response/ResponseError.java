@@ -28,8 +28,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseError extends Exception
-{
+public class ResponseError extends Exception {
     private HttpStatus httpStatus;
     private Status status;
     private String message;
@@ -38,8 +37,7 @@ public class ResponseError extends Exception
     private ErrorLayer errorLayer;
     private ErrorSource errorSource;
 
-    public ResponseError( Exception exception )
-    {
+    public ResponseError(Exception exception) {
         this.status = Status.ERROR;
         this.exception = exception;
         this.httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -48,8 +46,7 @@ public class ResponseError extends Exception
         this.errorLayer = ErrorLayer.API_LAYER;
     }
 
-    public ResponseError( APIError apiError )
-    {
+    public ResponseError(APIError apiError) {
         this.httpStatus = HttpStatus.BAD_REQUEST;
         this.status = Status.ERROR;
         this.apiError = apiError;
@@ -57,8 +54,7 @@ public class ResponseError extends Exception
         this.errorLayer = ErrorLayer.API_LAYER;
     }
 
-    public ResponseError( ErrorSource errorSource, APIError apiError, HttpStatus httpStatus )
-    {
+    public ResponseError(ErrorSource errorSource, APIError apiError, HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
         this.status = Status.ERROR;
         this.apiError = apiError;

@@ -41,48 +41,36 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @RestController
-public class AuthController implements IAuthController
-{
+public class AuthController implements IAuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    public ResponseEntity<ResponseWrapper<JwtResponse>> login( HttpServletRequest request, UserDTO user )
-    {
-        try
-        {
-            Authentication authentication = authenticationManager.authenticate( new UsernamePasswordAuthenticationToken( user.getUsername(), user.getPassword() ) );
-            SecurityContextHolder.getContext().setAuthentication( authentication );
-            JwtResponse accessToken = jwtTokenProvider.generateToken( user );
-            return ResponseUtil.wrap( new Response<>( accessToken ) );
-        }
-        catch( Exception ex )
-        {
-            return ResponseUtil.wrap( ex );
+    public ResponseEntity<ResponseWrapper<JwtResponse>> login(HttpServletRequest request, UserDTO user) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            JwtResponse accessToken = jwtTokenProvider.generateToken(user);
+            return ResponseUtil.wrap(new Response<>(accessToken));
+        } catch (Exception ex) {
+            return ResponseUtil.wrap(ex);
         }
     }
 
     @Override
-    public ResponseEntity<ResponseWrapper<Authentication>> validate( TokenBodyDTO token )
-    {
-        try
-        {
-            boolean isValid = jwtTokenProvider.validateToken( token.getToken() );
-            if( isValid )
-            {
-                UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication( token.getToken() );
-                return ResponseUtil.wrap( new Response<>( authentication ) );
+    public ResponseEntity<ResponseWrapper<Authentication>> validate(TokenBodyDTO token) {
+        try {
+            boolean isValid = jwtTokenProvider.validateToken(token.getToken());
+            if (isValid) {
+                UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(token.getToken());
+                return ResponseUtil.wrap(new Response<>(authentication));
+            } else {
+                throw new Exception("Invalid JWT");
             }
-            else
-            {
-                throw new Exception( "Invalid JWT" );
-            }
-        }
-        catch( Exception ex )
-        {
-            return ResponseUtil.wrap( ex );
+        } catch (Exception ex) {
+            return ResponseUtil.wrap(ex);
         }
     }
 }

@@ -21,14 +21,12 @@ package org.upwork.prototype.domain.response;
  * @since 14 June 2022
  */
 
-public enum ErrorLayer
-{
-    API_LAYER( 0 );
+public enum ErrorLayer {
+    API_LAYER(0);
 
     public final int code;
 
-    ErrorLayer( int code )
-    {
+    ErrorLayer(int code) {
         this.code = code;
     }
 }

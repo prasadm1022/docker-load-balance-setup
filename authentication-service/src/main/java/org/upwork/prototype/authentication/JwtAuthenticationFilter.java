@@ -38,9 +38,8 @@ import java.io.IOException;
  * @since 14 June 2022
  */
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter
-{
-    private static final Logger LOGGER = LoggerFactory.getLogger( JwtAuthenticationFilter.class );
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
     private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
     private static final String AUTH_HEADER_PREFIX = "Bearer ";
 
@@ -48,31 +47,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
     private JwtTokenProvider jwtTokenProvider;
 
     @Override
-    protected void doFilterInternal( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain ) throws ServletException, IOException
-    {
-        try
-        {
-            String jwt = getJwtFromRequest( httpServletRequest );
-            if( StringUtils.hasText( jwt ) && jwtTokenProvider.validateToken( jwt ) )
-            {
-                UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication( jwt );
-                authentication.setDetails( new WebAuthenticationDetailsSource().buildDetails( httpServletRequest ) );
-                SecurityContextHolder.getContext().setAuthentication( authentication );
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+        try {
+            String jwt = getJwtFromRequest(httpServletRequest);
+            if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+                UsernamePasswordAuthenticationToken authentication = jwtTokenProvider.getAuthentication(jwt);
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+        } catch (Exception ex) {
+            LOGGER.error("Could not set authentication in security context by jwt", ex);
         }
-        catch( Exception ex )
-        {
-            LOGGER.error( "Could not set authentication in security context by jwt", ex );
-        }
-        filterChain.doFilter( httpServletRequest, httpServletResponse );
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    private String getJwtFromRequest( HttpServletRequest request )
-    {
-        String bearerToken = request.getHeader( AUTHORIZATION_HEADER_KEY );
-        if( StringUtils.hasText( bearerToken ) && bearerToken.startsWith( AUTH_HEADER_PREFIX ) )
-        {
-            return bearerToken.substring( AUTH_HEADER_PREFIX.length() );
+    private String getJwtFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER_KEY);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(AUTH_HEADER_PREFIX)) {
+            return bearerToken.substring(AUTH_HEADER_PREFIX.length());
         }
         return null;
     }

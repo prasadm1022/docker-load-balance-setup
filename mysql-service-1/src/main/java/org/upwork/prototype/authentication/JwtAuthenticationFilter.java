@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.authentication;
+ */
+package org.upwork.prototype.authentication;
 
 import io.jsonwebtoken.*;
 import lombok.AllArgsConstructor;
@@ -45,9 +46,8 @@ import java.util.stream.Collectors;
  * @since 14 June 2022
  */
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter
-{
-    private static final Logger LOGGER = LoggerFactory.getLogger( JwtAuthenticationFilter.class );
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
     private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
     private static final String AUTH_HEADER_PREFIX = "Bearer ";
     private static final String AUTHORITIES_CLAIM_KEY = "roles";
@@ -56,29 +56,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
     private static final String USER_NAME_CLAIM_KEY = "username";
     private static final String EMAIL_CLAIM_KEY = "email";
 
-    @Value( "${upwork.prototype.jwtSecret}" )
+    @Value("${upwork.prototype.jwtSecret}")
     private String jwtSecret;
 
     @Override
-    protected void doFilterInternal( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain ) throws ServletException, IOException
-    {
-        try
-        {
-            String jwt = getJwtFromRequest( httpServletRequest );
-            boolean isValid = validateJwt( jwt );
-            if( isValid )
-            {
-                UsernamePasswordAuthenticationToken authentication = getAuthentication( jwt );
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken( authentication.getPrincipal(), authentication.getCredentials(), authentication.getAuthorities() );
-                usernamePasswordAuthenticationToken.setDetails( new WebAuthenticationDetailsSource().buildDetails( httpServletRequest ) );
-                SecurityContextHolder.getContext().setAuthentication( usernamePasswordAuthenticationToken );
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+        try {
+            String jwt = getJwtFromRequest(httpServletRequest);
+            boolean isValid = validateJwt(jwt);
+            if (isValid) {
+                UsernamePasswordAuthenticationToken authentication = getAuthentication(jwt);
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(), authentication.getAuthorities());
+                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+        } catch (Exception ex) {
+            LOGGER.error("Could not set authentication in security context by jwt", ex);
         }
-        catch( Exception ex )
-        {
-            LOGGER.error( "Could not set authentication in security context by jwt", ex );
-        }
-        filterChain.doFilter( httpServletRequest, httpServletResponse );
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     /**
@@ -87,12 +82,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
      * @param request request
      * @return jwt
      */
-    private String getJwtFromRequest( HttpServletRequest request )
-    {
-        String bearerToken = request.getHeader( AUTHORIZATION_HEADER_KEY );
-        if( StringUtils.hasText( bearerToken ) && bearerToken.startsWith( AUTH_HEADER_PREFIX ) )
-        {
-            return bearerToken.substring( AUTH_HEADER_PREFIX.length() );
+    private String getJwtFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER_KEY);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(AUTH_HEADER_PREFIX)) {
+            return bearerToken.substring(AUTH_HEADER_PREFIX.length());
         }
         return null;
     }
@@ -103,50 +96,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
      * @param authToken jwt token
      * @return isValid
      */
-    private boolean validateJwt( String authToken )
-    {
-        try
-        {
-            Claims body = Jwts.parser().setSigningKey( jwtSecret ).parseClaimsJws( authToken ).getBody();
+    private boolean validateJwt(String authToken) {
+        try {
+            Claims body = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
             Date expirationDate = body.getExpiration();
-            if( expirationDate != null )
-            {
-                boolean notExpired = expirationDate.after( new Date() );
-                if( notExpired )
-                {
+            if (expirationDate != null) {
+                boolean notExpired = expirationDate.after(new Date());
+                if (notExpired) {
                     return true;
-                }
-                else
-                {
-                    LOGGER.error( "JWT Token expired" );
+                } else {
+                    LOGGER.error("JWT Token expired");
                     return false;
                 }
-            }
-            else
-            {
-                LOGGER.error( "JWT Token expiration date not found" );
+            } else {
+                LOGGER.error("JWT Token expiration date not found");
                 return false;
             }
-        }
-        catch( SignatureException ex )
-        {
-            LOGGER.error( "Invalid JWT signature" );
-        }
-        catch( MalformedJwtException ex )
-        {
-            LOGGER.error( "Invalid JWT token" );
-        }
-        catch( ExpiredJwtException ex )
-        {
-            LOGGER.error( "Expired JWT token" );
-        }
-        catch( UnsupportedJwtException ex )
-        {
-            LOGGER.error( "Unsupported JWT token" );
-        }
-        catch( IllegalArgumentException ex )
-        {
-            LOGGER.error( "JWT claims string is empty." );
+        } catch (SignatureException ex) {
+            LOGGER.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            LOGGER.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            LOGGER.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            LOGGER.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            LOGGER.error("JWT claims string is empty.");
         }
         return false;
     }
@@ -157,29 +132,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
      * @param authToken authToken
      * @return UsernamePasswordAuthenticationToken
      */
-    public UsernamePasswordAuthenticationToken getAuthentication( String authToken )
-    {
-        Claims claims = Jwts.parser().setSigningKey( jwtSecret ).parseClaimsJws( authToken ).getBody();
+    public UsernamePasswordAuthenticationToken getAuthentication(String authToken) {
+        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
 
-        Long userId = ( Long ) claims.get( USER_ID_CLAIM_KEY );
-        String name = ( String ) claims.get( NAME_CLAIM_KEY );
-        String username = ( String ) claims.get( USER_NAME_CLAIM_KEY );
-        String email = ( String ) claims.get( EMAIL_CLAIM_KEY );
+        Long userId = (Long) claims.get(USER_ID_CLAIM_KEY);
+        String name = (String) claims.get(NAME_CLAIM_KEY);
+        String username = (String) claims.get(USER_NAME_CLAIM_KEY);
+        String email = (String) claims.get(EMAIL_CLAIM_KEY);
 
         Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
-        if( claims.get( AUTHORITIES_CLAIM_KEY ) != null )
-        {
-            authorities = ( ( List<String> ) claims.get( AUTHORITIES_CLAIM_KEY ) ).stream().map( SimpleGrantedAuthority::new ).collect( Collectors.toList() );
+        if (claims.get(AUTHORITIES_CLAIM_KEY) != null) {
+            authorities = ((List<String>) claims.get(AUTHORITIES_CLAIM_KEY)).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         }
 
-        UserPrincipalDTO userPrincipal = new UserPrincipalDTO( userId, name, username, email, authToken, authorities );
+        UserPrincipalDTO userPrincipal = new UserPrincipalDTO(userId, name, username, email, authToken, authorities);
 
-        return new UsernamePasswordAuthenticationToken( userPrincipal, "", authorities );
+        return new UsernamePasswordAuthenticationToken(userPrincipal, "", authorities);
     }
 
     @AllArgsConstructor
-    private static class UserPrincipalDTO
-    {
+    private static class UserPrincipalDTO {
         private Long id;
         private String name;
         private String username;

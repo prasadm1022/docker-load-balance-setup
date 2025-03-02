@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.controller;
+ */
+package org.upwork.prototype.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,21 +31,20 @@ import java.util.Map;
  * @since 29 May 2022
  */
 
-@RequestMapping( "/v1/customer" )
-public interface ICustomerController
-{
-    @GetMapping( produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Customer>> search( CustomerSearchCriteria customerSearchCriteria );
+@RequestMapping("/v1/customer")
+public interface ICustomerController {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Customer>> search(CustomerSearchCriteria customerSearchCriteria);
 
-    @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Customer>> saveCustomer( @RequestBody Customer customer );
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Customer>> saveCustomer(@RequestBody Customer customer);
 
-    @PutMapping( produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Customer>> updateCustomer( @RequestBody Customer customer );
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Customer>> updateCustomer(@RequestBody Customer customer);
 
-    @PatchMapping( value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Customer>> patchCustomer( @PathVariable long id, @RequestBody Map<Object,Object> fields );
+    @PatchMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Customer>> patchCustomer(@PathVariable long id, @RequestBody Map<Object, Object> fields);
 
-    @DeleteMapping( value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Void>> deleteCustomer( @PathVariable long id );
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Void>> deleteCustomer(@PathVariable long id);
 }

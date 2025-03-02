@@ -28,15 +28,14 @@ import org.upwork.prototype.domain.response.ResponseError;
  * @since 14 June 2022
  */
 
-public interface IUserService
-{
-    Response<UserDTO> searchUser( String username ) throws ResponseError;
+public interface IUserService {
+    Response<UserDTO> searchUser(String username) throws ResponseError;
 
-    Response<RoleDTO> searchRole( String roleName ) throws ResponseError;
+    Response<RoleDTO> searchRole(String roleName) throws ResponseError;
 
-    Response<UserDTO> saveUser( UserDTO opUser ) throws ResponseError;
+    Response<UserDTO> saveUser(UserDTO opUser) throws ResponseError;
 
-    Response<RoleDTO> saveRole( RoleDTO role ) throws ResponseError;
+    Response<RoleDTO> saveRole(RoleDTO role) throws ResponseError;
 
-    Response<Void> addRoleToUser( String username, String roleName ) throws ResponseError;
+    Response<Void> addRoleToUser(String username, String roleName) throws ResponseError;
 }

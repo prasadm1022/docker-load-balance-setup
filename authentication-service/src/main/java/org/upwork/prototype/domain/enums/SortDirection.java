@@ -23,15 +23,13 @@ package org.upwork.prototype.domain.enums;
  * @since 14 June 2022
  */
 
-public enum SortDirection
-{
-    ASC( "asc" ),
-    DESC( "desc" );
+public enum SortDirection {
+    ASC("asc"),
+    DESC("desc");
 
     private final String direction;
 
-    SortDirection( String direction )
-    {
+    SortDirection(String direction) {
         this.direction = direction;
     }
 }

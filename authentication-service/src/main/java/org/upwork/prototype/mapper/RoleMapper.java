@@ -28,24 +28,21 @@ import org.upwork.prototype.entity.OpRole;
  */
 
 @Component
-public class RoleMapper
-{
-    public RoleDTO toDto( OpRole opRole )
-    {
+public class RoleMapper {
+    public RoleDTO toDto(OpRole opRole) {
         RoleDTO role = new RoleDTO();
 
-        role.setId( opRole.getId() );
-        role.setName( opRole.getName() );
+        role.setId(opRole.getId());
+        role.setName(opRole.getName());
 
         return role;
     }
 
-    public OpRole toEntity( RoleDTO role )
-    {
+    public OpRole toEntity(RoleDTO role) {
         OpRole opRole = new OpRole();
 
-        opRole.setId( role.getId() );
-        opRole.setName( role.getName() );
+        opRole.setId(role.getId());
+        opRole.setName(role.getName());
 
         return opRole;
     }

@@ -23,12 +23,10 @@ package org.upwork.prototype.util;
  * @since 14 June 2022
  */
 
-public class Constants
-{
+public class Constants {
     // exception messages
     public static final String EXCEPTION = "Exception";
 
-    private Constants()
-    {
+    private Constants() {
     }
 }

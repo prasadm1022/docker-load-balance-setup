@@ -36,36 +36,33 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@Table( name = "OP_ROLE" )
-public class OpRole implements Serializable
-{
+@Table(name = "OP_ROLE")
+public class OpRole implements Serializable {
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "id_seq_role" )
-    @SequenceGenerator( name = "id_seq_role", sequenceName = "ROLE_ID_SEQ", allocationSize = 1 )
-    @Column( name = "ID" )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq_role")
+    @SequenceGenerator(name = "id_seq_role", sequenceName = "ROLE_ID_SEQ", allocationSize = 1)
+    @Column(name = "ID")
     private Long id;
 
-    @Column( name = "NAME" )
-    @Size( max = 128 )
+    @Column(name = "NAME")
+    @Size(max = 128)
     private String name;
 
-    @OneToMany( mappedBy = "opRole", cascade = { CascadeType.ALL }, fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "opRole", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<OpUserRole> opUserRoles = new ArrayList<>();
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        OpRole role = ( OpRole ) o;
-        return Objects.equals( id, role.id )
-                       && name == role.name
-                       && Objects.equals( opUserRoles, role.opUserRoles );
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OpRole role = (OpRole) o;
+        return Objects.equals(id, role.id)
+                && name == role.name
+                && Objects.equals(opUserRoles, role.opUserRoles);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( id, name, opUserRoles );
+    public int hashCode() {
+        return Objects.hash(id, name, opUserRoles);
     }
 }

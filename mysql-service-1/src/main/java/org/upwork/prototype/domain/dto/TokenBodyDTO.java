@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.domain.dto;
+ */
+package org.upwork.prototype.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,22 +26,19 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenBodyDTO
-{
+public class TokenBodyDTO {
     private String token;
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        TokenBodyDTO that = ( TokenBodyDTO ) o;
-        return Objects.equals( token, that.token );
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TokenBodyDTO that = (TokenBodyDTO) o;
+        return Objects.equals(token, that.token);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( token );
+    public int hashCode() {
+        return Objects.hash(token);
     }
 }

@@ -34,27 +34,24 @@ import java.util.Objects;
 @Getter
 @Setter
 @Embeddable
-public class OpUserRolePK implements Serializable
-{
-    @Column( name = "USER_ID" )
+public class OpUserRolePK implements Serializable {
+    @Column(name = "USER_ID")
     private Long userId;
 
-    @Column( name = "ROLE_ID" )
+    @Column(name = "ROLE_ID")
     private Long roleId;
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        OpUserRolePK that = ( OpUserRolePK ) o;
-        return Objects.equals( userId, that.userId )
-                       && Objects.equals( roleId, that.roleId );
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OpUserRolePK that = (OpUserRolePK) o;
+        return Objects.equals(userId, that.userId)
+                && Objects.equals(roleId, that.roleId);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( userId, roleId );
+    public int hashCode() {
+        return Objects.hash(userId, roleId);
     }
 }

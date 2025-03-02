@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.domain.criteria;
+ */
+package org.upwork.prototype.domain.criteria;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +30,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CustomerSearchCriteria
-{
+public class CustomerSearchCriteria {
     private List<Long> ids;
     private String firstName;
     private String lastName;
@@ -44,15 +44,13 @@ public class CustomerSearchCriteria
     private String sortBy;
     private SortDirection sortDirection;
 
-    public CustomerSearchCriteria()
-    {
+    public CustomerSearchCriteria() {
         this.size = 10;
         this.page = 0;
         this.start = 0;
     }
 
-    public CustomerSearchCriteria( int start, int page, int size, String sortBy, SortDirection sortDirection )
-    {
+    public CustomerSearchCriteria(int start, int page, int size, String sortBy, SortDirection sortDirection) {
         this.start = start;
         this.page = page;
         this.size = size;

@@ -29,34 +29,30 @@ import org.upwork.prototype.entity.OpUserRole;
  */
 
 @Component
-public class UserMapper
-{
-    public UserDTO toDto( OpUser opUser )
-    {
+public class UserMapper {
+    public UserDTO toDto(OpUser opUser) {
         UserDTO user = new UserDTO();
 
-        user.setId( opUser.getId() );
-        user.setName( opUser.getName() );
-        user.setUsername( opUser.getUsername() );
-        user.setEmail( opUser.getEmail() );
-        user.setPassword( opUser.getPassword() );
-        for( OpUserRole opUserRole : opUser.getOpUserRoles() )
-        {
-            user.getRoles().add( opUserRole.getOpRole().getName() );
+        user.setId(opUser.getId());
+        user.setName(opUser.getName());
+        user.setUsername(opUser.getUsername());
+        user.setEmail(opUser.getEmail());
+        user.setPassword(opUser.getPassword());
+        for (OpUserRole opUserRole : opUser.getOpUserRoles()) {
+            user.getRoles().add(opUserRole.getOpRole().getName());
         }
 
         return user;
     }
 
-    public OpUser toEntity( UserDTO user )
-    {
+    public OpUser toEntity(UserDTO user) {
         OpUser opUser = new OpUser();
 
-        opUser.setId( user.getId() );
-        opUser.setName( user.getName() );
-        opUser.setUsername( user.getUsername() );
-        opUser.setEmail( user.getEmail() );
-        opUser.setPassword( user.getPassword() );
+        opUser.setId(user.getId());
+        opUser.setName(user.getName());
+        opUser.setUsername(user.getUsername());
+        opUser.setEmail(user.getEmail());
+        opUser.setPassword(user.getPassword());
 
         return opUser;
     }

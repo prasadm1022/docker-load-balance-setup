@@ -27,7 +27,6 @@ import org.upwork.prototype.entity.OpRole;
  * @since 14 June 2022
  */
 
-public interface IRoleRepository extends JpaRepository<OpRole,Long>, JpaSpecificationExecutor<OpRole>
-{
-    OpRole findByName( String name );
+public interface IRoleRepository extends JpaRepository<OpRole, Long>, JpaSpecificationExecutor<OpRole> {
+    OpRole findByName(String name);
 }

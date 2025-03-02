@@ -32,8 +32,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageData
-{
+public class PageData {
     private int count;
     private int total;
 }

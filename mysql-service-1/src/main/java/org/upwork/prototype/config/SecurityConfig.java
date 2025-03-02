@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.config;
+ */
+package org.upwork.prototype.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,42 +36,37 @@ import org.upwork.prototype.authentication.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
-    protected void configure( HttpSecurity http ) throws Exception
-    {
+    protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
 
-        http.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS );
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers( HttpMethod.GET, "/**" ).authenticated();
-        http.authorizeRequests().antMatchers( HttpMethod.OPTIONS, "/**" ).authenticated();
-        http.authorizeRequests().antMatchers( HttpMethod.POST, "/**" ).authenticated();
-        http.authorizeRequests().antMatchers( HttpMethod.PUT, "/**" ).authenticated();
-        http.authorizeRequests().antMatchers( HttpMethod.PATCH, "/**" ).authenticated();
-        http.authorizeRequests().antMatchers( HttpMethod.DELETE, "/**" ).authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.PATCH, "/**").authenticated();
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/**").authenticated();
         http.authorizeRequests().anyRequest().authenticated();
 
-        http.addFilterBefore( authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class );
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception
-    {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManager();
     }
 
     @Bean
-    public JwtAuthenticationFilter authenticationTokenFilterBean()
-    {
+    public JwtAuthenticationFilter authenticationTokenFilterBean() {
         return new JwtAuthenticationFilter();
     }
 
     @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher()
-    {
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
     }
 }

@@ -38,52 +38,41 @@ import java.util.ArrayList;
  */
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer
-{
-    public static void main( String[] args )
-    {
-        SpringApplication.run( Application.class, args );
+public class Application extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
-    protected SpringApplicationBuilder configure( SpringApplicationBuilder application )
-    {
-        return application.sources( Application.class );
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
     }
 
     @Bean
-    public RestTemplate restTemplate( RestTemplateBuilder restTemplateBuilder )
-    {
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.build();
     }
 
     @Bean
-    CommandLineRunner run( UserService userService )
-    {
+    CommandLineRunner run(UserService userService) {
         return args ->
         {
-            try
-            {
+            try {
                 final String ADMIN = "ADMIN";
                 final String USER = "USER";
                 final String USERNAME = "prasadm";
-                if( userService.searchRole( ADMIN ).getData().isEmpty() )
-                {
-                    userService.saveRole( new RoleDTO( null, ADMIN ) );
+                if (userService.searchRole(ADMIN).getData().isEmpty()) {
+                    userService.saveRole(new RoleDTO(null, ADMIN));
                 }
-                if( userService.searchRole( USER ).getData().isEmpty() )
-                {
-                    userService.saveRole( new RoleDTO( null, USER ) );
+                if (userService.searchRole(USER).getData().isEmpty()) {
+                    userService.saveRole(new RoleDTO(null, USER));
                 }
-                if( userService.searchUser( USERNAME ).getData().isEmpty() )
-                {
-                    userService.saveUser( new UserDTO( null, "Prasad Madusanka", USERNAME, "prasadm1022@gmail.com", "123456789", new ArrayList<>() ) );
-                    userService.addRoleToUser( USERNAME, ADMIN );
-                    userService.addRoleToUser( USERNAME, USER );
+                if (userService.searchUser(USERNAME).getData().isEmpty()) {
+                    userService.saveUser(new UserDTO(null, "Prasad Madusanka", USERNAME, "prasadm1022@gmail.com", "123456789", new ArrayList<>()));
+                    userService.addRoleToUser(USERNAME, ADMIN);
+                    userService.addRoleToUser(USERNAME, USER);
                 }
-            }
-            catch( Exception ex )
-            {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         };

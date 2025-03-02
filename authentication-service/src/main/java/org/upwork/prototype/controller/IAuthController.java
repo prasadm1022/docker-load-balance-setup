@@ -37,12 +37,11 @@ import javax.validation.Valid;
  * @since 14 June 2022
  */
 
-@RequestMapping( "/v1/auth" )
-public interface IAuthController
-{
-    @PostMapping( value = "/login", produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<JwtResponse>> login( HttpServletRequest request, @Valid @RequestBody UserDTO user );
+@RequestMapping("/v1/auth")
+public interface IAuthController {
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<JwtResponse>> login(HttpServletRequest request, @Valid @RequestBody UserDTO user);
 
-    @PostMapping( value = "/validate", produces = MediaType.APPLICATION_JSON_VALUE )
-    ResponseEntity<ResponseWrapper<Authentication>> validate( @Valid @RequestBody TokenBodyDTO token );
+    @PostMapping(value = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ResponseWrapper<Authentication>> validate(@Valid @RequestBody TokenBodyDTO token);
 }

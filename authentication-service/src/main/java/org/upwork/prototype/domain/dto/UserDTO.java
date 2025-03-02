@@ -36,8 +36,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO
-{
+public class UserDTO {
     private Long id;
     private String name;
     private String username;
@@ -46,22 +45,20 @@ public class UserDTO
     private List<String> roles = new ArrayList<>();
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        UserDTO userDTO = ( UserDTO ) o;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDTO userDTO = (UserDTO) o;
         return id == userDTO.id
-                       && Objects.equals( name, userDTO.name )
-                       && Objects.equals( username, userDTO.username )
-                       && Objects.equals( email, userDTO.email )
-                       && Objects.equals( password, userDTO.password )
-                       && Objects.equals( roles, userDTO.roles );
+                && Objects.equals(name, userDTO.name)
+                && Objects.equals(username, userDTO.username)
+                && Objects.equals(email, userDTO.email)
+                && Objects.equals(password, userDTO.password)
+                && Objects.equals(roles, userDTO.roles);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( id, name, username, email, password, roles );
+    public int hashCode() {
+        return Objects.hash(id, name, username, email, password, roles);
     }
 }

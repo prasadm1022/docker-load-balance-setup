@@ -29,15 +29,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Error
-{
+public class Error {
     private long code;
     private String message;
     private String details;
     private List<String> errors;
 
-    public Error()
-    {
+    public Error() {
         errors = new ArrayList<>();
     }
 }

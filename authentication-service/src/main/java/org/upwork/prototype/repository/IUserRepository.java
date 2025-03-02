@@ -27,7 +27,6 @@ import org.upwork.prototype.entity.OpUser;
  * @since 14 June 2022
  */
 
-public interface IUserRepository extends JpaRepository<OpUser,Long>, JpaSpecificationExecutor<OpUser>
-{
-    OpUser findByUsername( String username );
+public interface IUserRepository extends JpaRepository<OpUser, Long>, JpaSpecificationExecutor<OpUser> {
+    OpUser findByUsername(String username);
 }

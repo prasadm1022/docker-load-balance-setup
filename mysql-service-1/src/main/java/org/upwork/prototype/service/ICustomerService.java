@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.service;
+ */
+package org.upwork.prototype.service;
 
 import org.upwork.prototype.domain.criteria.CustomerSearchCriteria;
 import org.upwork.prototype.domain.dto.Customer;
@@ -28,15 +29,14 @@ import java.util.Map;
  * @since 29 May 2022
  */
 
-public interface ICustomerService
-{
-    Response<Customer> searchCustomers( CustomerSearchCriteria customerSearchCriteria ) throws ResponseError;
+public interface ICustomerService {
+    Response<Customer> searchCustomers(CustomerSearchCriteria customerSearchCriteria) throws ResponseError;
 
-    Response<Customer> saveCustomer( Customer customer ) throws ResponseError;
+    Response<Customer> saveCustomer(Customer customer) throws ResponseError;
 
-    Response<Customer> updateCustomer( Customer customer ) throws ResponseError;
+    Response<Customer> updateCustomer(Customer customer) throws ResponseError;
 
-    Response<Customer> patchCustomer( long id, Map<Object,Object> fields ) throws ResponseError;
+    Response<Customer> patchCustomer(long id, Map<Object, Object> fields) throws ResponseError;
 
-    Response<Void> deleteCustomer( long id ) throws ResponseError;
+    Response<Void> deleteCustomer(long id) throws ResponseError;
 }

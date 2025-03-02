@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.repository;
+ */
+package org.upwork.prototype.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -27,6 +28,5 @@ import org.upwork.prototype.entity.OpCustomer;
  */
 
 @Repository
-public interface ICustomerRepository extends JpaRepository<OpCustomer,Long>, JpaSpecificationExecutor<OpCustomer>
-{
+public interface ICustomerRepository extends JpaRepository<OpCustomer, Long>, JpaSpecificationExecutor<OpCustomer> {
 }

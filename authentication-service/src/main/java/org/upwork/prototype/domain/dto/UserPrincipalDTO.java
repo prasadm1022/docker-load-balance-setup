@@ -37,8 +37,7 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPrincipalDTO
-{
+public class UserPrincipalDTO {
     private Long id;
     private String name;
     private String username;
@@ -47,22 +46,20 @@ public class UserPrincipalDTO
     private Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        UserPrincipalDTO that = ( UserPrincipalDTO ) o;
-        return Objects.equals( id, that.id )
-                       && Objects.equals( name, that.name )
-                       && Objects.equals( username, that.username )
-                       && Objects.equals( email, that.email )
-                       && Objects.equals( token, that.token )
-                       && Objects.equals( authorities, that.authorities );
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserPrincipalDTO that = (UserPrincipalDTO) o;
+        return Objects.equals(id, that.id)
+                && Objects.equals(name, that.name)
+                && Objects.equals(username, that.username)
+                && Objects.equals(email, that.email)
+                && Objects.equals(token, that.token)
+                && Objects.equals(authorities, that.authorities);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( id, name, username, email, token, authorities );
+    public int hashCode() {
+        return Objects.hash(id, name, username, email, token, authorities);
     }
 }

@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.config;
+ */
+package org.upwork.prototype.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -28,18 +29,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class WebConfig implements WebMvcConfigurer
-{
-    private static final long MAX_AGE_SECS = ( 60 * 60 );
+public class WebConfig implements WebMvcConfigurer {
+    private static final long MAX_AGE_SECS = (60 * 60);
 
     @Override
-    public void addCorsMappings( CorsRegistry registry )
-    {
-        registry.addMapping( "/**" )
-                .allowedOrigins( "*" )
-                .allowedMethods( "GET", "OPTIONS", "POST", "PUT", "PATCH", "DELETE" )
-                .allowedHeaders( "*" )
-                .allowCredentials( false )
-                .maxAge( MAX_AGE_SECS );
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "OPTIONS", "POST", "PUT", "PATCH", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(false)
+                .maxAge(MAX_AGE_SECS);
     }
 }

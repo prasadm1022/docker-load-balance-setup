@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.domain.response;
+ */
+package org.upwork.prototype.domain.response;
 
 /**
  * Status
@@ -21,17 +22,15 @@
  * @since 29 May 2022
  */
 
-public enum Status
-{
-    SUCCESS( 1, "Success" ),
-    WARNING( 0, "Warning" ),
-    ERROR( -1, "Error" );
+public enum Status {
+    SUCCESS(1, "Success"),
+    WARNING(0, "Warning"),
+    ERROR(-1, "Error");
 
     public final int code;
     public final String message;
 
-    Status( int code, String message )
-    {
+    Status(int code, String message) {
         this.code = code;
         this.message = message;
     }

@@ -38,55 +38,52 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@Table( name = "OP_USER" )
-public class OpUser implements Serializable
-{
+@Table(name = "OP_USER")
+public class OpUser implements Serializable {
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "id_seq_user" )
-    @SequenceGenerator( name = "id_seq_user", sequenceName = "USER_ID_SEQ", allocationSize = 1 )
-    @Column( name = "ID" )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq_user")
+    @SequenceGenerator(name = "id_seq_user", sequenceName = "USER_ID_SEQ", allocationSize = 1)
+    @Column(name = "ID")
     private Long id;
 
     @NotBlank
-    @Column( name = "NAME" )
-    @Size( max = 128 )
+    @Column(name = "NAME")
+    @Size(max = 128)
     private String name;
 
     @NotBlank
-    @Column( name = "USERNAME" )
-    @Size( max = 128 )
+    @Column(name = "USERNAME")
+    @Size(max = 128)
     private String username;
 
     @NotBlank
-    @Column( name = "EMAIL" )
-    @Size( max = 128 )
+    @Column(name = "EMAIL")
+    @Size(max = 128)
     private String email;
 
     @NotBlank
-    @Column( name = "PASSWORD" )
-    @Size( max = 1024 )
+    @Column(name = "PASSWORD")
+    @Size(max = 1024)
     private String password;
 
-    @OneToMany( mappedBy = "opUser", cascade = { CascadeType.ALL }, fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "opUser", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<OpUserRole> opUserRoles = new ArrayList<>();
 
     @Override
-    public boolean equals( Object o )
-    {
-        if( this == o ) return true;
-        if( o == null || getClass() != o.getClass() ) return false;
-        OpUser opUser = ( OpUser ) o;
-        return Objects.equals( id, opUser.id )
-                       && Objects.equals( name, opUser.name )
-                       && Objects.equals( username, opUser.username )
-                       && Objects.equals( email, opUser.email )
-                       && Objects.equals( password, opUser.password )
-                       && Objects.equals( opUserRoles, opUser.opUserRoles );
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OpUser opUser = (OpUser) o;
+        return Objects.equals(id, opUser.id)
+                && Objects.equals(name, opUser.name)
+                && Objects.equals(username, opUser.username)
+                && Objects.equals(email, opUser.email)
+                && Objects.equals(password, opUser.password)
+                && Objects.equals(opUserRoles, opUser.opUserRoles);
     }
 
     @Override
-    public int hashCode()
-    {
-        return Objects.hash( id, name, username, email, password, opUserRoles );
+    public int hashCode() {
+        return Objects.hash(id, name, username, email, password, opUserRoles);
     }
 }

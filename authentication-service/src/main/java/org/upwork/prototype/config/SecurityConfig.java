@@ -39,46 +39,40 @@ import org.upwork.prototype.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
     @Override
-    protected void configure( HttpSecurity http ) throws Exception
-    {
+    protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
 
-        http.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS );
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers( "/v1/auth/**" ).permitAll();
+        http.authorizeRequests().antMatchers("/v1/auth/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
 
-        http.addFilterBefore( authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class );
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
-    public void configure( AuthenticationManagerBuilder authenticationManagerBuilder ) throws Exception
-    {
-        authenticationManagerBuilder.userDetailsService( userService ).passwordEncoder( getPasswordEncoder() );
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(getPasswordEncoder());
     }
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception
-    {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManager();
     }
 
     @Bean
-    public JwtAuthenticationFilter authenticationTokenFilterBean()
-    {
+    public JwtAuthenticationFilter authenticationTokenFilterBean() {
         return new JwtAuthenticationFilter();
     }
 
     @Bean
-    public BCryptPasswordEncoder getPasswordEncoder()
-    {
+    public BCryptPasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

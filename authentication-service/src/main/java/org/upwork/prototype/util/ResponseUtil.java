@@ -27,21 +27,17 @@ import org.upwork.prototype.domain.response.ResponseWrapper;
  * @since 14 June 2022
  */
 
-public class ResponseUtil
-{
-    private ResponseUtil()
-    {
+public class ResponseUtil {
+    private ResponseUtil() {
     }
 
-    public static <T> ResponseEntity<ResponseWrapper<T>> wrap( Response<T> response )
-    {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>( response );
-        return ResponseEntity.status( responseWrapper.getHttpStatus().value ).body( responseWrapper );
+    public static <T> ResponseEntity<ResponseWrapper<T>> wrap(Response<T> response) {
+        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>(response);
+        return ResponseEntity.status(responseWrapper.getHttpStatus().value).body(responseWrapper);
     }
 
-    public static <T> ResponseEntity<ResponseWrapper<T>> wrap( Exception error )
-    {
-        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>( error );
-        return ResponseEntity.status( responseWrapper.getHttpStatus().value ).body( responseWrapper );
+    public static <T> ResponseEntity<ResponseWrapper<T>> wrap(Exception error) {
+        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>(error);
+        return ResponseEntity.status(responseWrapper.getHttpStatus().value).body(responseWrapper);
     }
 }

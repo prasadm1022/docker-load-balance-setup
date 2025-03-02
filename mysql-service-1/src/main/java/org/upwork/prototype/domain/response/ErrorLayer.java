@@ -12,21 +12,20 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.domain.response;
+ */
+package org.upwork.prototype.domain.response;
 
 /**
  * @author prasadm
  * @since 29 May 2022
  */
 
-public enum ErrorLayer
-{
-    API_LAYER( 0 );
+public enum ErrorLayer {
+    API_LAYER(0);
 
     public final int code;
 
-    ErrorLayer( int code )
-    {
+    ErrorLayer(int code) {
         this.code = code;
     }
 }

@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype;
+ */
+package org.upwork.prototype;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,22 +31,18 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @SpringBootApplication
-public class Application extends SpringBootServletInitializer
-{
-    public static void main( String[] args )
-    {
-        SpringApplication.run( Application.class, args );
+public class Application extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
-    protected SpringApplicationBuilder configure( SpringApplicationBuilder application )
-    {
-        return application.sources( Application.class );
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
     }
 
     @Bean
-    public RestTemplate restTemplate( RestTemplateBuilder restTemplateBuilder )
-    {
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder.build();
     }
 }

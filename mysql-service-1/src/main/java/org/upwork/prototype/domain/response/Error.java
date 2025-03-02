@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */package org.upwork.prototype.domain.response;
+ */
+package org.upwork.prototype.domain.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,15 +28,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Error
-{
+public class Error {
     private long code;
     private String message;
     private String details;
     private List<String> errors;
 
-    public Error()
-    {
+    public Error() {
         errors = new ArrayList<>();
     }
 }
